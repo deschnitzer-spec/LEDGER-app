@@ -2,7 +2,7 @@ const KEY = 'ledger-v1';
 const defaults = { habits:[['Wash face','daily'],['Drink water','daily'],['Shower','daily'],['Make bed','daily'],['Maintain finger nails','weekly'],['Trim eyebrows','weekly']].map((x,i)=>({id:'seed-'+i,name:x[0],frequency:x[1],createdAt:new Date().toISOString()})), completions:{}, transactions:[] };
 let data; try { data=JSON.parse(localStorage.getItem(KEY)) || defaults } catch { data=defaults }
 let transactionType='income';
-const $=s=>document.querySelector(s); const dateKey=(d=new Date())=>new Date(d).toISOString().slice(0,10); const today=dateKey();
+const $=s=>document.querySelector(s); const dateKey=(value=new Date())=>{const d=typeof value==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(value)?new Date(value+'T12:00:00'):new Date(value);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}; const today=dateKey();
 const prettyDate=(d=new Date())=>d.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});
 const save=()=>localStorage.setItem(KEY,JSON.stringify(data));
 const completed=(id,key=today)=>!!data.completions[key]?.includes(id);
