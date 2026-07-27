@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#07110c" />
+  <title>Ledger — your personal operating system</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .habit { padding: 0; gap: 0; cursor: default; }
+    .habit-main { border: 0; background: transparent; color: var(--ink); padding: 13px; display: flex; align-items: center; text-align: left; gap: 12px; cursor: pointer; flex: 1; min-width: 0; }
+    .habit-delete { border: 0; background: transparent; color: #76877a; font-size: 21px; line-height: 1; padding: 12px 13px; cursor: pointer; }
+    .habit-delete:hover { color: var(--red); }
+  </style>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">L</span><span>LEDGER</span></div>
+      <button class="icon-button" id="exportButton" aria-label="Export your data" title="Export your data">⇩</button>
+    </header>
+
+    <section class="view active" id="todayView">
+      <div class="hero-row">
+        <div><p class="eyebrow" id="dateLabel"></p><h1>Good <span id="greeting">morning</span>.</h1></div>
+        <div class="streak-pill"><span>🔥</span><strong id="streakValue">0</strong><small>day streak</small></div>
+      </div>
+      <section class="progress-card">
+        <div class="progress-head"><span>Today’s rhythm</span><strong id="todayPercent">0%</strong></div>
+        <div class="progress-track"><i id="todayProgress"></i></div>
+        <p id="progressCaption">A clean slate. Start with one thing.</p>
+      </section>
+      <div class="section-title"><h2>Daily</h2><span id="dailyCount">0 of 0</span></div>
+      <div class="habit-list" id="dailyHabits"></div>
+      <div class="section-title weekly-title"><h2>Weekly</h2><span id="weeklyCount">Sunday reset</span></div>
+      <div class="habit-list" id="weeklyHabits"></div>
+      <button class="add-habit-button" id="addHabitButton"><span>＋</span> Add a habit</button>
+    </section>
+
+    <section class="view" id="cashView">
+      <p class="eyebrow">YOUR CASH</p><h1>The cash ledger.</h1>
+      <section class="balance-card"><p>AVAILABLE BALANCE</p><strong id="balanceValue">$0.00</strong><div><span id="incomeTotal">+$0.00 in</span><span id="expenseTotal">−$0.00 out</span></div></section>
+      <div class="cash-actions"><button class="money-button income" id="addIncomeButton"><span>＋</span> Add money</button><button class="money-button expense" id="addExpenseButton"><span>−</span> Remove money</button></div>
+      <div class="section-title"><h2>Recent activity</h2><button class="text-button" id="clearTransactions">Clear</button></div>
+      <div class="transactions" id="transactionList"></div>
+    </section>
+
+    <section class="view" id="historyView">
+      <p class="eyebrow">LOOKING BACK</p><h1>Your rhythm,<br><em>remembered.</em></h1>
+      <div class="history-summary"><span>Completed habit records</span><strong id="historyTotal">0</strong></div>
+      <div class="section-title"><h2>Recent days</h2></div>
+      <div id="historyList" class="history-list"></div>
+    </section>
+
+    <section class="view" id="statsView">
+      <p class="eyebrow">THE BIG PICTURE</p><h1>Small things,<br><em>well kept.</em></h1>
+      <div class="stat-feature"><span>🔥</span><div><p>CURRENT STREAK</p><strong id="statsStreak">0 days</strong><small id="streakSubtext">Your consistency starts today.</small></div></div>
+      <div class="stat-grid">
+        <div><small>COMPLETION</small><strong id="statsCompletion">0%</strong><span>all time</span></div>
+        <div><small>HABITS</small><strong id="statsHabits">0</strong><span>being built</span></div>
+        <div><small>ENTRIES</small><strong id="statsEntries">0</strong><span>in history</span></div>
+        <div><small>CASH</small><strong id="statsCash">$0</strong><span>on hand</span></div>
+      </div>
+      <section class="privacy-card"><span>◌</span><div><strong>Private by design</strong><p>Your Ledger lives only on this device.</p></div></section>
+    </section>
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button class="nav-item active" data-view="todayView"><span>⌂</span><small>Today</small></button>
+      <button class="nav-item" data-view="cashView"><span>◇</span><small>Cash</small></button>
+      <button class="nav-item" data-view="historyView"><span>▣</span><small>History</small></button>
+      <button class="nav-item" data-view="statsView"><span>◌</span><small>Stats</small></button>
+    </nav>
+  </main>
+
+  <dialog id="habitDialog"><form method="dialog" id="habitForm" class="modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow">NEW RHYTHM</p><h2>Add a habit</h2><label>Habit name<input required id="habitName" maxlength="50" placeholder="e.g. Read for 20 minutes" /></label><label>How often?<select id="habitFrequency"><option value="daily">Every day</option><option value="weekly">Every week</option></select></label><button class="primary-button" value="default">Add to Ledger</button></form></dialog>
+  <dialog id="transactionDialog"><form method="dialog" id="transactionForm" class="modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow" id="transactionDialogLabel">CASH IN</p><h2 id="transactionDialogTitle">Add money</h2><label>Amount<input required id="transactionAmount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="0.00" /></label><label>Note <input required id="transactionNote" maxlength="60" placeholder="What was this for?" /></label><button class="primary-button" id="transactionSubmit" value="default">Save entry</button></form></dialog>
+  <script src="app.js"></script>
+</body>
+</html>
