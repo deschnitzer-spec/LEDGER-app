@@ -32,6 +32,13 @@
     body.theme-ice { --green: #86d6c8; --bright: #b8fff2; --line: #254944; --surface: #0b201e; --muted: #94b8b3; }
     body.theme-ice .app-shell { background: radial-gradient(ellipse at 95% 3%, #17514c 0%, transparent 28%), #061613; }
     body.theme-ice .progress-card, body.theme-ice .balance-card, body.theme-ice .stat-feature { background: linear-gradient(135deg, #16423e, #0b2422); border-color: #28665f; }
+    .hard-card { background: linear-gradient(135deg, #273b1a, #13220c); border: 1px solid #4d7335; border-radius: 20px; padding: 16px; display: flex; gap: 13px; align-items: center; margin: -16px 0 28px; }
+    .hard-card > span { width: 42px; height: 42px; border: 1px solid var(--bright); border-radius: 13px; display: grid; place-items: center; color: var(--bright); font: 21px "DM Serif Display"; }
+    .hard-card p { color: var(--green); font-size: 9px; font-weight: 700; letter-spacing: 1.3px; margin: 0 0 3px; }
+    .hard-card strong { display: block; font-size: 14px; }
+    .hard-card small { color: var(--muted); font-size: 11px; }
+    .hard-option { display: flex !important; grid-template-columns: 20px 1fr; align-items: center; gap: 9px !important; padding: 11px; border: 1px solid #34503a; border-radius: 10px; background: #0a150e; }
+    .hard-option input { width: 17px; height: 17px; accent-color: var(--bright); }
     .habit { padding: 0; gap: 0; cursor: default; }
     .habit-main { border: 0; background: transparent; color: var(--ink); padding: 13px; display: flex; align-items: center; text-align: left; gap: 12px; cursor: pointer; flex: 1; min-width: 0; }
     .habit-delete { border: 0; background: transparent; color: #76877a; font-size: 21px; line-height: 1; padding: 12px 13px; cursor: pointer; }
@@ -55,6 +62,7 @@
         <div class="progress-track"><i id="todayProgress"></i></div>
         <p id="progressCaption">A clean slate. Start with one thing.</p>
       </section>
+      <section class="hard-card" id="hardCard" hidden><span>75</span><div><p>75 HARD</p><strong id="hardTitle">Day 1 of 75</strong><small id="hardCaption">74 days remaining</small></div></section>
       <div class="section-title"><h2>Daily</h2><span id="dailyCount">0 of 0</span></div>
       <div class="habit-list" id="dailyHabits"></div>
       <div class="section-title weekly-title"><h2>Weekly</h2><span id="weeklyCount">Sunday reset</span></div>
@@ -98,7 +106,7 @@
 
   <dialog id="habitDialog"><form method="dialog" id="habitForm" class="modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow">NEW RHYTHM</p><h2>Add a habit</h2><label>Habit name<input required id="habitName" maxlength="50" placeholder="e.g. Read for 20 minutes" /></label><label>How often?<select id="habitFrequency"><option value="daily">Every day</option><option value="weekly">Every week</option></select></label><button class="primary-button" value="default">Add to Ledger</button></form></dialog>
   <dialog id="transactionDialog"><form method="dialog" id="transactionForm" class="modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow" id="transactionDialogLabel">CASH IN</p><h2 id="transactionDialogTitle">Add money</h2><label>Amount<input required id="transactionAmount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="0.00" /></label><label>Note <input required id="transactionNote" maxlength="60" placeholder="What was this for?" /></label><button class="primary-button" id="transactionSubmit" value="default">Save entry</button></form></dialog>
-  <dialog id="profileDialog"><form method="dialog" id="profileForm" class="modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow">MAKE IT YOURS</p><h2>Personalize Ledger</h2><label>Your name<input id="profileName" maxlength="30" autocomplete="given-name" placeholder="What should Ledger call you?" /></label><label>Color theme<select id="profileTheme"><option value="forest">LEDGER green</option><option value="ocean">Ocean blue</option><option value="violet">Violet dusk</option><option value="rose">Rosewood</option><option value="amber">Golden amber</option><option value="midnight">Midnight blue</option><option value="copper">Burnished copper</option><option value="ice">Arctic teal</option></select></label><button class="primary-button" value="default">Save preferences</button></form></dialog>
+  <dialog id="profileDialog"><form method="dialog" id="profileForm" class="modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow">MAKE IT YOURS</p><h2>Personalize Ledger</h2><label>Your name<input id="profileName" maxlength="30" autocomplete="given-name" placeholder="What should Ledger call you?" /></label><label>Color theme<select id="profileTheme"><option value="forest">LEDGER green</option><option value="ocean">Ocean blue</option><option value="violet">Violet dusk</option><option value="rose">Rosewood</option><option value="amber">Golden amber</option><option value="midnight">Midnight blue</option><option value="copper">Burnished copper</option><option value="ice">Arctic teal</option></select></label><label class="hard-option"><input id="hardEnabled" type="checkbox" /><span>I'm doing 75 Hard</span></label><label>75 Hard start date<input id="hardStartDate" type="date" /></label><button class="primary-button" value="default">Save preferences</button></form></dialog>
   <script src="app.js"></script>
 </body>
 </html>
