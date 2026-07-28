@@ -75,13 +75,23 @@
     .habit-main { border: 0; background: transparent; color: var(--ink); padding: 13px; display: flex; align-items: center; text-align: left; gap: 12px; cursor: pointer; flex: 1; min-width: 0; }
     .habit-delete { border: 0; background: transparent; color: #76877a; font-size: 21px; line-height: 1; padding: 12px 13px; cursor: pointer; }
     .habit-delete:hover { color: var(--red); }
+    .personalize-button { border: 1px solid #36553b; background: #14251a; border-radius: 9px; color: var(--bright); padding: 7px 10px; font: 700 10px "DM Sans"; letter-spacing: .2px; cursor: pointer; }
+    .checkin-card,.review-card { border: 1px solid var(--line); background: var(--surface); border-radius: 19px; padding: 16px; margin-bottom: 24px; }
+    .checkin-card p,.review-card p { color: var(--muted); font-size: 9px; letter-spacing: 1.2px; margin: 0 0 5px; }
+    .checkin-card strong { font: 21px "DM Serif Display"; }
+    .mood-buttons { display: flex; gap: 7px; margin: 14px 0; }.mood-buttons button{width:31px;height:31px;border:1px solid #405346;border-radius:9px;background:#102016;color:var(--ink);cursor:pointer}.mood-buttons button.active{background:var(--bright);color:#102013;border-color:var(--bright)}
+    .checkin-card textarea { width:100%;min-height:62px;resize:vertical;border:1px solid #34503a;background:#0a150e;color:var(--ink);border-radius:10px;padding:10px;font:12px "DM Sans";outline-color:var(--bright); }
+    .checkin-card .text-button { margin-top:9px; padding:0; color:var(--bright); }
+    .heat-map { display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:25px; }.heat-day{aspect-ratio:1;border-radius:5px;background:#17251b}.heat-day.level-1{background:#315438}.heat-day.level-2{background:#5b9656}.heat-day.level-3{background:var(--bright)}
+    .review-card strong{font:24px "DM Serif Display";display:block;color:var(--bright);margin:7px 0}.review-card span{font-size:11px;color:var(--muted)}
+    .goal-list{display:grid;gap:9px}.goal{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:13px}.goal header{display:flex;justify-content:space-between;font-size:12px;margin-bottom:9px}.goal small{color:var(--muted)}.goal .progress-track{margin:0}.goal-delete{border:0;background:none;color:var(--muted);cursor:pointer}
   </style>
 </head>
 <body>
   <main class="app-shell">
     <header class="topbar">
       <div class="brand"><span class="brand-mark">L</span><span>LEDGER</span></div>
-      <div class="topbar-actions"><button class="icon-button" id="profileButton" aria-label="Personalize Ledger" title="Personalize Ledger">◌</button><button class="icon-button" id="exportButton" aria-label="Export your data" title="Export your data">⇩</button></div>
+      <div class="topbar-actions"><button class="personalize-button" id="profileButton" aria-label="Personalize Ledger">Customize</button><button class="icon-button" id="exportButton" aria-label="Export your data" title="Export your data">⇩</button></div>
     </header>
 
     <section class="view active" id="todayView">
@@ -129,11 +139,19 @@
       </div>
       <section class="privacy-card"><span>◌</span><div><strong>Private by design</strong><p>Your Ledger lives only on this device.</p></div></section>
     </section>
+    <section class="view" id="plusView">
+      <p class="eyebrow">LEDGER PLUS</p><h1>Your life,<br><em>in context.</em></h1>
+      <section class="checkin-card"><div><p>DAILY CHECK-IN</p><strong>How do you feel?</strong></div><div id="moodButtons" class="mood-buttons"><button data-mood="1">1</button><button data-mood="2">2</button><button data-mood="3">3</button><button data-mood="4">4</button><button data-mood="5">5</button></div><textarea id="dailyNote" maxlength="280" placeholder="What mattered today?"></textarea><button id="saveNoteButton" class="text-button">Save today’s note</button></section>
+      <div class="section-title"><h2>Consistency</h2><span>Last 28 days</span></div><div id="heatMap" class="heat-map"></div>
+      <section class="review-card"><p>THIS WEEK</p><strong id="reviewCompletion">0% complete</strong><span id="reviewText">Your weekly review will appear here.</span></section>
+      <div class="section-title"><h2>Savings goals</h2><button class="text-button" id="addGoalButton">Add goal</button></div><div id="goalList" class="goal-list"></div>
+    </section>
     <nav class="bottom-nav" aria-label="Main navigation">
       <button class="nav-item active" data-view="todayView"><span>⌂</span><small>Today</small></button>
       <button class="nav-item" data-view="cashView"><span>◇</span><small>Cash</small></button>
       <button class="nav-item" data-view="historyView"><span>▣</span><small>History</small></button>
       <button class="nav-item" data-view="statsView"><span>◌</span><small>Stats</small></button>
+      <button class="nav-item" data-view="plusView"><span>✦</span><small>Plus</small></button>
     </nav>
   </main>
 
@@ -141,6 +159,7 @@
   <dialog id="transactionDialog"><form method="dialog" id="transactionForm" class="modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow" id="transactionDialogLabel">CASH IN</p><h2 id="transactionDialogTitle">Add money</h2><label>Amount<input required id="transactionAmount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="0.00" /></label><label>Note <input required id="transactionNote" maxlength="60" placeholder="What was this for?" /></label><button class="primary-button" id="transactionSubmit" value="default">Save entry</button></form></dialog>
   <dialog id="profileDialog"><form method="dialog" id="profileForm" class="modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow">MAKE IT YOURS</p><h2>Personalize Ledger</h2><label>Your name<input id="profileName" maxlength="30" autocomplete="given-name" placeholder="What should Ledger call you?" /></label><label>Color theme<select id="profileTheme"><option value="forest">LEDGER green</option><option value="mono">Black &amp; white</option><option value="ocean">Ocean blue</option><option value="violet">Violet dusk</option><option value="rose">Rosewood</option><option value="amber">Golden amber</option><option value="midnight">Midnight blue</option><option value="copper">Burnished copper</option><option value="ice">Arctic teal</option></select></label><details class="program-picker"><summary>Timed programs</summary><div><label>Start date<input id="programStartDate" type="date" /></label><label class="hard-option"><input id="programHard75" type="checkbox" /><span><strong>75 Hard</strong><small>75-day discipline challenge</small></span></label><label class="hard-option"><input id="programReset14" type="checkbox" /><span><strong>14-Day Reset</strong><small>Reset your space, sleep, and routine</small></span></label><label class="hard-option"><input id="programMove30" type="checkbox" /><span><strong>30-Day Movement</strong><small>Build a daily movement rhythm</small></span></label><label class="hard-option"><input id="programRead30" type="checkbox" /><span><strong>30-Day Reading</strong><small>Create a daily reading practice</small></span></label></div></details><button class="primary-button" value="default">Save preferences</button></form></dialog>
   <dialog id="timerDialog"><section class="timer-modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow">FOCUS TIMER</p><h2 id="timerHabitName">Focus</h2><strong id="timerDisplay">10:00</strong><p id="timerMessage">Ready when you are.</p><button class="primary-button" id="timerToggle">Start timer</button><button class="timer-finish" id="timerFinish">Finish &amp; complete</button></section></dialog>
+  <dialog id="goalDialog"><form method="dialog" id="goalForm" class="modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow">SAVINGS GOAL</p><h2>Set a goal</h2><label>What are you saving for?<input id="goalName" required maxlength="40" placeholder="e.g. New headphones" /></label><label>Target amount<input id="goalAmount" required type="number" min="1" step="0.01" inputmode="decimal" placeholder="100" /></label><button class="primary-button" value="default">Save goal</button></form></dialog>
   <script src="app.js"></script>
 </body>
 </html>
