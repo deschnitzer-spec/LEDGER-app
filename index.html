@@ -133,6 +133,7 @@
       <section class="balance-card"><p>AVAILABLE BALANCE</p><strong id="balanceValue">$0.00</strong><div><span id="incomeTotal">+$0.00 in</span><span id="expenseTotal">−$0.00 out</span></div></section>
       <div class="cash-actions"><button class="money-button income" id="addIncomeButton"><span>＋</span> Add money</button><button class="money-button expense" id="addExpenseButton"><span>−</span> Remove money</button></div>
       <section class="cash-chart-card"><div class="chart-heading"><div><p>7-DAY MONEY FLOW</p><strong id="chartSummary">No activity yet</strong></div><span>Income / expenses</span></div><div id="cashChart" class="cash-chart"></div></section>
+      <div class="section-title"><h2>Savings goals</h2><button class="text-button" id="addGoalButton" type="button">Add goal</button></div><div id="goalList" class="goal-list"></div>
       <div class="section-title"><h2>Recent activity</h2><button class="text-button" id="clearTransactions">Clear</button></div>
       <div class="transactions" id="transactionList"></div>
     </section>
@@ -160,7 +161,6 @@
       <section class="checkin-card"><div><p>DAILY CHECK-IN</p><strong>How do you feel? <small>out of 10</small></strong></div><div id="moodButtons" class="mood-buttons"><button data-mood="1">1</button><button data-mood="2">2</button><button data-mood="3">3</button><button data-mood="4">4</button><button data-mood="5">5</button><button data-mood="6">6</button><button data-mood="7">7</button><button data-mood="8">8</button><button data-mood="9">9</button><button data-mood="10">10</button></div><textarea id="dailyNote" maxlength="280" placeholder="What mattered today?"></textarea><button id="saveNoteButton" class="text-button">Save today’s note</button></section>
       <div class="section-title"><h2>Consistency</h2><span>Last 28 days</span></div><div id="heatMap" class="heat-map"></div>
       <section class="review-card"><p>THIS WEEK</p><strong id="reviewCompletion">0% complete</strong><span id="reviewText">Your weekly review will appear here.</span></section>
-      <div class="section-title"><h2>Savings goals</h2><button class="text-button" id="addGoalButton">Add goal</button></div><div id="goalList" class="goal-list"></div>
     </section>
     <nav class="bottom-nav" aria-label="Main navigation">
       <button class="nav-item" data-view="cashView"><span>◇</span><small>Cash</small></button>
