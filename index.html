@@ -101,6 +101,10 @@
       .habit { min-height: 58px; }
       .bottom-nav { max-width: 720px; }
     }
+    .cash-overview { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,.9fr); gap:10px; margin-bottom:13px; }
+    .cash-overview .balance-card,.cash-overview .cash-chart-card { margin:0; }
+    .cash-overview .balance-card { padding:17px; }.cash-overview .balance-card strong{font-size:36px;margin:10px 0 16px}.cash-overview .balance-card div{gap:8px;font-size:8px}
+    .cash-overview .cash-chart-card { padding:12px; }.cash-overview .chart-heading > span{display:none}.cash-overview .chart-heading strong{font-size:10px}.cash-overview .cash-chart{height:103px;gap:3px;margin-top:10px}.cash-overview .chart-day small{font-size:8px}
   </style>
 </head>
 <body>
@@ -130,9 +134,8 @@
 
     <section class="view" id="cashView">
       <p class="eyebrow">YOUR CASH</p><h1>The cash ledger.</h1>
-      <section class="balance-card"><p>AVAILABLE BALANCE</p><strong id="balanceValue">$0.00</strong><div><span id="incomeTotal">+$0.00 in</span><span id="expenseTotal">−$0.00 out</span></div></section>
+      <div class="cash-overview"><section class="balance-card"><p>AVAILABLE BALANCE</p><strong id="balanceValue">$0.00</strong><div><span id="incomeTotal">+$0.00 in</span><span id="expenseTotal">−$0.00 out</span></div></section><section class="cash-chart-card"><div class="chart-heading"><div><p>7-DAY MONEY FLOW</p><strong id="chartSummary">No activity yet</strong></div><span>Income / expenses</span></div><div id="cashChart" class="cash-chart"></div></section></div>
       <div class="cash-actions"><button class="money-button income" id="addIncomeButton"><span>＋</span> Add money</button><button class="money-button expense" id="addExpenseButton"><span>−</span> Remove money</button></div>
-      <section class="cash-chart-card"><div class="chart-heading"><div><p>7-DAY MONEY FLOW</p><strong id="chartSummary">No activity yet</strong></div><span>Income / expenses</span></div><div id="cashChart" class="cash-chart"></div></section>
       <div class="section-title"><h2>Savings goals</h2><button class="text-button" id="addGoalButton" type="button">Add goal</button></div><div id="goalList" class="goal-list"></div>
       <div class="section-title"><h2>Recent activity</h2><button class="text-button" id="clearTransactions">Clear</button></div>
       <div class="transactions" id="transactionList"></div>
@@ -178,6 +181,6 @@
   <dialog id="goalDialog"><form method="dialog" id="goalForm" class="modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow">SAVINGS GOAL</p><h2>Set a goal</h2><label>What are you saving for?<input id="goalName" required maxlength="40" placeholder="e.g. New headphones" /></label><label>Target amount<input id="goalAmount" required type="number" min="1" step="0.01" inputmode="decimal" placeholder="100" /></label><button class="primary-button" value="default">Save goal</button></form></dialog>
   <dialog id="welcomeDialog"><form method="dialog" id="welcomeForm" class="modal"><p class="eyebrow">WELCOME TO LEDGER</p><h2>Make it yours.</h2><label>Your name<input id="welcomeName" required maxlength="30" autocomplete="given-name" placeholder="What should Ledger call you?" /></label><label>Choose a color theme<select id="welcomeTheme"><option value="forest">LEDGER green</option><option value="mono">Black &amp; white</option><option value="ocean">Ocean blue</option><option value="violet">Violet dusk</option><option value="rose">Rosewood</option><option value="amber">Golden amber</option><option value="midnight">Midnight blue</option><option value="copper">Burnished copper</option><option value="ice">Arctic teal</option></select></label><button class="primary-button" value="default">Open Ledger</button></form></dialog>
   <dialog id="dataDialog"><section class="data-modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow">YOUR LEDGER</p><h2>Data</h2><button class="primary-button" id="saveDataButton">Save data</button><button class="delete-data-button" id="deleteDataButton">Delete data</button></section></dialog>
-  <script src="app.js"></script>
+  <script src="app.js?v=ledger-plus-3"></script>
 </body>
 </html>
