@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
   <style>
+    .topbar-actions { display: flex; align-items: center; gap: 2px; }
     .habit { padding: 0; gap: 0; cursor: default; }
     .habit-main { border: 0; background: transparent; color: var(--ink); padding: 13px; display: flex; align-items: center; text-align: left; gap: 12px; cursor: pointer; flex: 1; min-width: 0; }
     .habit-delete { border: 0; background: transparent; color: #76877a; font-size: 21px; line-height: 1; padding: 12px 13px; cursor: pointer; }
@@ -20,7 +21,7 @@
   <main class="app-shell">
     <header class="topbar">
       <div class="brand"><span class="brand-mark">L</span><span>LEDGER</span></div>
-      <button class="icon-button" id="exportButton" aria-label="Export your data" title="Export your data">⇩</button>
+      <div class="topbar-actions"><button class="icon-button" id="profileButton" aria-label="Personalize Ledger" title="Personalize Ledger">◌</button><button class="icon-button" id="exportButton" aria-label="Export your data" title="Export your data">⇩</button></div>
     </header>
 
     <section class="view active" id="todayView">
@@ -76,6 +77,7 @@
 
   <dialog id="habitDialog"><form method="dialog" id="habitForm" class="modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow">NEW RHYTHM</p><h2>Add a habit</h2><label>Habit name<input required id="habitName" maxlength="50" placeholder="e.g. Read for 20 minutes" /></label><label>How often?<select id="habitFrequency"><option value="daily">Every day</option><option value="weekly">Every week</option></select></label><button class="primary-button" value="default">Add to Ledger</button></form></dialog>
   <dialog id="transactionDialog"><form method="dialog" id="transactionForm" class="modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow" id="transactionDialogLabel">CASH IN</p><h2 id="transactionDialogTitle">Add money</h2><label>Amount<input required id="transactionAmount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="0.00" /></label><label>Note <input required id="transactionNote" maxlength="60" placeholder="What was this for?" /></label><button class="primary-button" id="transactionSubmit" value="default">Save entry</button></form></dialog>
+  <dialog id="profileDialog"><form method="dialog" id="profileForm" class="modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow">MAKE IT YOURS</p><h2>Personalize Ledger</h2><label>Your name<input id="profileName" maxlength="30" autocomplete="given-name" placeholder="What should Ledger call you?" /></label><button class="primary-button" value="default">Save my name</button></form></dialog>
   <script src="app.js"></script>
 </body>
 </html>
