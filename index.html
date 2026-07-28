@@ -95,6 +95,12 @@
     .nav-item[data-view="todayView"] { position: relative; z-index: 4; transform: translateY(-18px); color: var(--bright); }
     .nav-item[data-view="todayView"] span { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid #6b986e; border-radius: 50%; background: #14261a; box-shadow: 0 0 0 5px #08120c; }
     .nav-item[data-view="todayView"] small { margin-top: -1px; }
+    @media (min-width: 700px) {
+      .app-shell { max-width: 720px; padding-left: 34px; padding-right: 34px; }
+      .topbar { height: 88px; }
+      .habit { min-height: 58px; }
+      .bottom-nav { max-width: 720px; }
+    }
   </style>
 </head>
 <body>
