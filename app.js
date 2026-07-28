@@ -3,7 +3,7 @@ const timedPrograms={hard75:{label:'75 HARD',days:75,mark:'75',rules:['Follow yo
 const defaults = { habits:[], completions:{}, transactions:[], profile:{name:'',theme:'forest',onboarded:false,hard75:{enabled:false,startDate:''}} };
 let data; try { data=JSON.parse(localStorage.getItem(KEY)) || defaults } catch { data=defaults }
 if(!data.profile)data.profile={name:'',theme:'forest',onboarded:false,hard75:{enabled:false,startDate:''}};if(!data.profile.theme)data.profile.theme='forest';if(data.profile.onboarded===undefined)data.profile.onboarded=!!data.profile.name;if(!data.profile.programs)data.profile.programs={};Object.keys(timedPrograms).forEach(key=>{if(!data.profile.programs[key])data.profile.programs[key]=key==='hard75'&&data.profile.hard75?data.profile.hard75:{enabled:false,startDate:''}}); let transactionType='income',timerHabitId=null,timerRemaining=0,timerRunning=false,timerInterval=null;
-if(!data.plus)data.plus={moods:{},notes:{},goals:[]};
+if(!data.plus)data.plus={moods:{},notes:{},goals:[]};if(!data.plus.moods)data.plus.moods={};if(!data.plus.notes)data.plus.notes={};if(!data.plus.goals)data.plus.goals=[];
 const $=s=>document.querySelector(s); const dateKey=(value=new Date())=>{const d=typeof value==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(value)?new Date(value+'T12:00:00'):new Date(value);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}; const today=dateKey();
 const prettyDate=(d=new Date())=>d.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});
 const save=()=>localStorage.setItem(KEY,JSON.stringify(data));
