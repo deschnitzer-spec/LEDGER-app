@@ -85,12 +85,17 @@
     .heat-map { display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:25px; }.heat-day{aspect-ratio:1;border-radius:5px;background:#17251b}.heat-day.level-1{background:#315438}.heat-day.level-2{background:#5b9656}.heat-day.level-3{background:var(--bright)}
     .review-card strong{font:24px "DM Serif Display";display:block;color:var(--bright);margin:7px 0}.review-card span{font-size:11px;color:var(--muted)}
     .goal-list{display:grid;gap:9px}.goal{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:13px}.goal header{display:flex;justify-content:space-between;font-size:12px;margin-bottom:9px}.goal small{color:var(--muted)}.goal .progress-track{margin:0}.goal-delete{border:0;background:none;color:var(--muted);cursor:pointer}
+    .personalize-button { border: 1px solid #36553b; background: #14251a; border-radius: 9px; color: var(--bright); padding: 7px 10px; font: 12px "DM Sans"; letter-spacing: 0; cursor: pointer; }
+    .mood-buttons { display: flex; justify-content: space-between; gap: 3px; margin: 14px 0; }
+    .mood-buttons button { width: 25px; height: 31px; border: 1px solid #405346; border-radius: 8px; background: #102016; color: var(--ink); cursor: pointer; font-size: 10px; }
+    .mood-buttons button.active { background: var(--bright); color: #102013; border-color: var(--bright); }
+    .checkin-card strong small { font: 11px "DM Sans"; color: var(--muted); }
   </style>
 </head>
 <body>
   <main class="app-shell">
     <header class="topbar">
-      <div class="brand"><span class="brand-mark">L</span><span>LEDGER</span></div>
+      <div class="brand"><span>LEDGER</span></div>
       <div class="topbar-actions"><button class="personalize-button" id="profileButton" aria-label="Personalize Ledger">Customize</button><button class="icon-button" id="exportButton" aria-label="Export your data" title="Export your data">⇩</button></div>
     </header>
 
@@ -141,15 +146,15 @@
     </section>
     <section class="view" id="plusView">
       <p class="eyebrow">LEDGER PLUS</p><h1>Your life,<br><em>in context.</em></h1>
-      <section class="checkin-card"><div><p>DAILY CHECK-IN</p><strong>How do you feel?</strong></div><div id="moodButtons" class="mood-buttons"><button data-mood="1">1</button><button data-mood="2">2</button><button data-mood="3">3</button><button data-mood="4">4</button><button data-mood="5">5</button></div><textarea id="dailyNote" maxlength="280" placeholder="What mattered today?"></textarea><button id="saveNoteButton" class="text-button">Save today’s note</button></section>
+      <section class="checkin-card"><div><p>DAILY CHECK-IN</p><strong>How do you feel? <small>out of 10</small></strong></div><div id="moodButtons" class="mood-buttons"><button data-mood="1">1</button><button data-mood="2">2</button><button data-mood="3">3</button><button data-mood="4">4</button><button data-mood="5">5</button><button data-mood="6">6</button><button data-mood="7">7</button><button data-mood="8">8</button><button data-mood="9">9</button><button data-mood="10">10</button></div><textarea id="dailyNote" maxlength="280" placeholder="What mattered today?"></textarea><button id="saveNoteButton" class="text-button">Save today’s note</button></section>
       <div class="section-title"><h2>Consistency</h2><span>Last 28 days</span></div><div id="heatMap" class="heat-map"></div>
       <section class="review-card"><p>THIS WEEK</p><strong id="reviewCompletion">0% complete</strong><span id="reviewText">Your weekly review will appear here.</span></section>
       <div class="section-title"><h2>Savings goals</h2><button class="text-button" id="addGoalButton">Add goal</button></div><div id="goalList" class="goal-list"></div>
     </section>
     <nav class="bottom-nav" aria-label="Main navigation">
-      <button class="nav-item active" data-view="todayView"><span>⌂</span><small>Today</small></button>
       <button class="nav-item" data-view="cashView"><span>◇</span><small>Cash</small></button>
       <button class="nav-item" data-view="historyView"><span>▣</span><small>History</small></button>
+      <button class="nav-item active" data-view="todayView"><span>⌂</span><small>Today</small></button>
       <button class="nav-item" data-view="statsView"><span>◌</span><small>Stats</small></button>
       <button class="nav-item" data-view="plusView"><span>✦</span><small>Plus</small></button>
     </nav>
