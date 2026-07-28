@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#07110c" />
-  <title>Ledger — your personal operating system</title>
+  <title>Ledger</title>
   <link rel="icon" href="ledger-home-icon-v2.png" type="image/png" />
   <link rel="apple-touch-icon" href="ledger-home-icon-v2.png" />
   <link rel="apple-touch-icon-precomposed" href="ledger-home-icon-v2.png" />
@@ -58,6 +58,16 @@
     #timerDisplay { display: block; color: var(--bright); font: 60px/1 "DM Serif Display"; letter-spacing: -2px; margin: 8px 0 12px; }
     #timerMessage { color: var(--muted); font-size: 12px; margin-bottom: 20px; }
     .timer-finish { border: 0; background: transparent; color: #9cb6a0; font: 600 12px "DM Sans"; padding: 15px 4px 1px; cursor: pointer; }
+    .cash-chart-card { border: 1px solid var(--line); background: var(--surface); border-radius: 19px; padding: 16px; margin: 0 0 28px; }
+    .chart-heading { display: flex; justify-content: space-between; align-items: start; }
+    .chart-heading p { color: var(--muted); font-size: 9px; letter-spacing: 1.1px; margin: 0 0 5px; }
+    .chart-heading strong { font-size: 13px; }
+    .chart-heading > span { color: var(--muted); font-size: 10px; }
+    .cash-chart { height: 126px; display: grid; grid-template-columns: repeat(7, 1fr); align-items: end; gap: 8px; margin-top: 15px; padding-top: 8px; border-bottom: 1px solid #324337; }
+    .chart-day { height: 100%; display: flex; flex-direction: column; justify-content: end; align-items: center; gap: 6px; }
+    .chart-bar { width: 100%; max-width: 22px; min-height: 3px; border-radius: 5px 5px 2px 2px; background: var(--bright); }
+    .chart-bar.expense { background: var(--red); border-radius: 2px 2px 5px 5px; }
+    .chart-day small { color: var(--muted); font-size: 9px; }
     .habit { padding: 0; gap: 0; cursor: default; }
     .habit-main { border: 0; background: transparent; color: var(--ink); padding: 13px; display: flex; align-items: center; text-align: left; gap: 12px; cursor: pointer; flex: 1; min-width: 0; }
     .habit-delete { border: 0; background: transparent; color: #76877a; font-size: 21px; line-height: 1; padding: 12px 13px; cursor: pointer; }
@@ -93,6 +103,7 @@
       <p class="eyebrow">YOUR CASH</p><h1>The cash ledger.</h1>
       <section class="balance-card"><p>AVAILABLE BALANCE</p><strong id="balanceValue">$0.00</strong><div><span id="incomeTotal">+$0.00 in</span><span id="expenseTotal">−$0.00 out</span></div></section>
       <div class="cash-actions"><button class="money-button income" id="addIncomeButton"><span>＋</span> Add money</button><button class="money-button expense" id="addExpenseButton"><span>−</span> Remove money</button></div>
+      <section class="cash-chart-card"><div class="chart-heading"><div><p>7-DAY MONEY FLOW</p><strong id="chartSummary">No activity yet</strong></div><span>Income / expenses</span></div><div id="cashChart" class="cash-chart"></div></section>
       <div class="section-title"><h2>Recent activity</h2><button class="text-button" id="clearTransactions">Clear</button></div>
       <div class="transactions" id="transactionList"></div>
     </section>
