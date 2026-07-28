@@ -90,13 +90,14 @@
     .mood-buttons button { width: 25px; height: 31px; border: 1px solid #405346; border-radius: 8px; background: #102016; color: var(--ink); cursor: pointer; font-size: 10px; }
     .mood-buttons button.active { background: var(--bright); color: #102013; border-color: var(--bright); }
     .checkin-card strong small { font: 11px "DM Sans"; color: var(--muted); }
+    .data-modal { position:relative;background:#102016;border:1px solid #36553b;border-radius:22px;padding:28px 23px 22px;text-align:center; }.data-modal h2{font:28px "DM Serif Display";margin:0 0 22px}.delete-data-button{width:100%;margin-top:12px;border:1px solid #754039;background:transparent;border-radius:11px;padding:13px;color:#ef9a8c;font:600 13px "DM Sans";cursor:pointer}
   </style>
 </head>
 <body>
   <main class="app-shell">
     <header class="topbar">
       <div class="brand"><span>LEDGER</span></div>
-      <div class="topbar-actions"><button class="personalize-button" id="profileButton" aria-label="Personalize Ledger">Customize</button><button class="icon-button" id="exportButton" aria-label="Export your data" title="Export your data">⇩</button></div>
+      <div class="topbar-actions"><button class="personalize-button" id="profileButton" aria-label="Personalize Ledger">Customize</button><button class="icon-button" id="dataButton" aria-label="Save or delete data" title="Data">⇩</button></div>
     </header>
 
     <section class="view active" id="todayView">
@@ -166,6 +167,7 @@
   <dialog id="timerDialog"><section class="timer-modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow">FOCUS TIMER</p><h2 id="timerHabitName">Focus</h2><strong id="timerDisplay">10:00</strong><p id="timerMessage">Ready when you are.</p><button class="primary-button" id="timerToggle">Start timer</button><button class="timer-finish" id="timerFinish">Finish &amp; complete</button></section></dialog>
   <dialog id="goalDialog"><form method="dialog" id="goalForm" class="modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow">SAVINGS GOAL</p><h2>Set a goal</h2><label>What are you saving for?<input id="goalName" required maxlength="40" placeholder="e.g. New headphones" /></label><label>Target amount<input id="goalAmount" required type="number" min="1" step="0.01" inputmode="decimal" placeholder="100" /></label><button class="primary-button" value="default">Save goal</button></form></dialog>
   <dialog id="welcomeDialog"><form method="dialog" id="welcomeForm" class="modal"><p class="eyebrow">WELCOME TO LEDGER</p><h2>Make it yours.</h2><label>Your name<input id="welcomeName" required maxlength="30" autocomplete="given-name" placeholder="What should Ledger call you?" /></label><label>Choose a color theme<select id="welcomeTheme"><option value="forest">LEDGER green</option><option value="mono">Black &amp; white</option><option value="ocean">Ocean blue</option><option value="violet">Violet dusk</option><option value="rose">Rosewood</option><option value="amber">Golden amber</option><option value="midnight">Midnight blue</option><option value="copper">Burnished copper</option><option value="ice">Arctic teal</option></select></label><button class="primary-button" value="default">Open Ledger</button></form></dialog>
+  <dialog id="dataDialog"><section class="data-modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow">YOUR LEDGER</p><h2>Data</h2><button class="primary-button" id="saveDataButton">Save data</button><button class="delete-data-button" id="deleteDataButton">Delete data</button></section></dialog>
   <script src="app.js"></script>
 </body>
 </html>
