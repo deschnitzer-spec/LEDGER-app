@@ -11,6 +11,27 @@
   <link rel="stylesheet" href="styles.css" />
   <style>
     .topbar-actions { display: flex; align-items: center; gap: 2px; }
+    body.theme-ocean { --green: #73c9e7; --bright: #a7efff; --line: #24434c; --surface: #0c1b20; --muted: #92aab2; }
+    body.theme-ocean .app-shell { background: radial-gradient(ellipse at 95% 3%, #174852 0%, transparent 28%), #071217; }
+    body.theme-ocean .progress-card, body.theme-ocean .balance-card, body.theme-ocean .stat-feature { background: linear-gradient(135deg, #143a44, #0d1d23); border-color: #285765; }
+    body.theme-violet { --green: #bf9aed; --bright: #e2c5ff; --line: #45345b; --surface: #191325; --muted: #b0a6bb; }
+    body.theme-violet .app-shell { background: radial-gradient(ellipse at 95% 3%, #38224d 0%, transparent 28%), #100b18; }
+    body.theme-violet .progress-card, body.theme-violet .balance-card, body.theme-violet .stat-feature { background: linear-gradient(135deg, #302041, #1c1328); border-color: #5a3e77; }
+    body.theme-rose { --green: #eea0ab; --bright: #ffc3c9; --line: #57373f; --surface: #241317; --muted: #c1a3a8; }
+    body.theme-rose .app-shell { background: radial-gradient(ellipse at 95% 3%, #512932 0%, transparent 28%), #170b0e; }
+    body.theme-rose .progress-card, body.theme-rose .balance-card, body.theme-rose .stat-feature { background: linear-gradient(135deg, #42222a, #241216); border-color: #71414b; }
+    body.theme-amber { --green: #e2b65d; --bright: #ffe09b; --line: #51432a; --surface: #201b10; --muted: #b9ae93; }
+    body.theme-amber .app-shell { background: radial-gradient(ellipse at 95% 3%, #554222 0%, transparent 28%), #151108; }
+    body.theme-amber .progress-card, body.theme-amber .balance-card, body.theme-amber .stat-feature { background: linear-gradient(135deg, #40341d, #251d0e); border-color: #725b2c; }
+    body.theme-midnight { --green: #8294e7; --bright: #b9c8ff; --line: #303b62; --surface: #101629; --muted: #9da6c6; }
+    body.theme-midnight .app-shell { background: radial-gradient(ellipse at 95% 3%, #1e2a5a 0%, transparent 28%), #080c1c; }
+    body.theme-midnight .progress-card, body.theme-midnight .balance-card, body.theme-midnight .stat-feature { background: linear-gradient(135deg, #1f2b55, #11172d); border-color: #3b4c8c; }
+    body.theme-copper { --green: #df936b; --bright: #ffc09b; --line: #5b382c; --surface: #261512; --muted: #c5a096; }
+    body.theme-copper .app-shell { background: radial-gradient(ellipse at 95% 3%, #593124 0%, transparent 28%), #190c09; }
+    body.theme-copper .progress-card, body.theme-copper .balance-card, body.theme-copper .stat-feature { background: linear-gradient(135deg, #47241c, #28120e); border-color: #794432; }
+    body.theme-ice { --green: #86d6c8; --bright: #b8fff2; --line: #254944; --surface: #0b201e; --muted: #94b8b3; }
+    body.theme-ice .app-shell { background: radial-gradient(ellipse at 95% 3%, #17514c 0%, transparent 28%), #061613; }
+    body.theme-ice .progress-card, body.theme-ice .balance-card, body.theme-ice .stat-feature { background: linear-gradient(135deg, #16423e, #0b2422); border-color: #28665f; }
     .habit { padding: 0; gap: 0; cursor: default; }
     .habit-main { border: 0; background: transparent; color: var(--ink); padding: 13px; display: flex; align-items: center; text-align: left; gap: 12px; cursor: pointer; flex: 1; min-width: 0; }
     .habit-delete { border: 0; background: transparent; color: #76877a; font-size: 21px; line-height: 1; padding: 12px 13px; cursor: pointer; }
@@ -77,7 +98,7 @@
 
   <dialog id="habitDialog"><form method="dialog" id="habitForm" class="modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow">NEW RHYTHM</p><h2>Add a habit</h2><label>Habit name<input required id="habitName" maxlength="50" placeholder="e.g. Read for 20 minutes" /></label><label>How often?<select id="habitFrequency"><option value="daily">Every day</option><option value="weekly">Every week</option></select></label><button class="primary-button" value="default">Add to Ledger</button></form></dialog>
   <dialog id="transactionDialog"><form method="dialog" id="transactionForm" class="modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow" id="transactionDialogLabel">CASH IN</p><h2 id="transactionDialogTitle">Add money</h2><label>Amount<input required id="transactionAmount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="0.00" /></label><label>Note <input required id="transactionNote" maxlength="60" placeholder="What was this for?" /></label><button class="primary-button" id="transactionSubmit" value="default">Save entry</button></form></dialog>
-  <dialog id="profileDialog"><form method="dialog" id="profileForm" class="modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow">MAKE IT YOURS</p><h2>Personalize Ledger</h2><label>Your name<input id="profileName" maxlength="30" autocomplete="given-name" placeholder="What should Ledger call you?" /></label><button class="primary-button" value="default">Save my name</button></form></dialog>
+  <dialog id="profileDialog"><form method="dialog" id="profileForm" class="modal"><button class="close" type="button" data-close-dialog aria-label="Close">×</button><p class="eyebrow">MAKE IT YOURS</p><h2>Personalize Ledger</h2><label>Your name<input id="profileName" maxlength="30" autocomplete="given-name" placeholder="What should Ledger call you?" /></label><label>Color theme<select id="profileTheme"><option value="forest">LEDGER green</option><option value="ocean">Ocean blue</option><option value="violet">Violet dusk</option><option value="rose">Rosewood</option><option value="amber">Golden amber</option><option value="midnight">Midnight blue</option><option value="copper">Burnished copper</option><option value="ice">Arctic teal</option></select></label><button class="primary-button" value="default">Save preferences</button></form></dialog>
   <script src="app.js"></script>
 </body>
 </html>
